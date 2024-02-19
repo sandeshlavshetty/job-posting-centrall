@@ -1,21 +1,15 @@
-import requests
-from bs4 import BeautifulSoup
+from selenium import webdriver  
+
 job_site_url='https://www.timesjobs.com/candidate/job-search.html?searchType=Home_Search&from=submit&asKey=OFF&txtKeywords=&cboPresFuncArea=35'
 
-#does not execute javascript
-response = requests.get(job_site_url)
+from selenium.webdriver.chrome.options import Options
+chrome_options = Options()
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--disable-dev-shm-usage')
+chrome_options.add_argument('--no-sandbox')
+driver = webdriver.Chrome(options=chrome_options)
 
-print('Status Code:', response.status_code)
+driver.get(job_site_url)
 
-with open('trending.html', 'w') as f:
-    f.write(response.text)
-
-doc = BeautifulSoup(response.text,'html.parser')
-
-print('Page title:',doc.title.text)
-
-#find all job li tags 
-job_li = doc.find_all('li',class_='clearfix job-bx wht-shd-bx')
-
-print(f'found {len(job_li)} jobs')
-
+print('Page title:',driver.title)

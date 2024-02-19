@@ -10,6 +10,8 @@ packages = [{include = "repl_nix_job_posting_centrall"}]
 python = "^3.10"
 requests = "^2.31.0"
 beautifulsoup4 = "^4.12.3"
+chromedriver-autoinstaller = "^0.6.4"
+selenium = "^4.17.2"
 
 
 [build-system]
